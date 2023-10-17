@@ -1,9 +1,24 @@
+import argparse
 import os
 import sys
 
 import yaml
 
 data_yaml = "data.yaml"
+
+
+def main():
+
+    args = parser.parse_args()
+
+    if args.create:
+        create_user()
+    elif args.show:
+        show()
+    elif args.login:
+        login()
+    elif args.delete:
+        delete()
 
 
 def create_user():
@@ -21,4 +36,15 @@ def create_user():
 
 # os.system("git config --global user.name ")  # user etc
 if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description="Command-line tool github config global")
+    parser.add_argument('-c', '--create', action="store_true", help="Create something")
+    parser.add_argument('-s', '--show', action="store_true", help="Show my login")
+    parser.add_argument('-l', '--login', action="store_true", help="Login to an account")
+    parser.add_argument('-d', '--delete', action="store_true", help="Delete something")
+    parser.add_argument('-e', '--edit', action="store_true", help="Edit something")
+
+    #lunch()
+    main()
+
     print("Lunch with no error.")
