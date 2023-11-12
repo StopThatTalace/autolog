@@ -3,7 +3,7 @@ Little tool to make my git config global faster
 
 ### How to use it:
 ```bash
-python3 /src/main.py [-h] [-c] [-s] [-l] [-d] [-e]
+python3 autolog.py [-h] [-c] [-s] [-l] [-d] [-e]
 ```
 
 ### The options:
