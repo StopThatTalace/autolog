@@ -22,6 +22,15 @@ class Autolog:
         elif args.edit:
             self.edit()
 
+    def create_user(self):
+        user_category = input("Enter a name for this new login (work, school, home etc..):")
+        self.users[user_category] = {
+            "name": input("Enter the NAME of your github account:"),
+            "email": input("Enter the EMAIL of your github account:")
+        }
+
+        with open(self.data_yaml, 'w') as data:
+            yaml.dump(self.users, data, default_style='\'"')
 
 if __name__ == "__main__":
     autolog = Autolog()
