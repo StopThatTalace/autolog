@@ -37,6 +37,14 @@ class Autolog:
         for category, user_info in self.users.items():
             print(f"{category}: Name - {user_info['name']}, Email - {user_info['email']}")
 
+    def setup_parser(self):
+        self.parser = argparse.ArgumentParser(description="Command-line tool for GitHub config global")
+        self.parser.add_argument('-c', '--create', action="store_true", help="Create something")
+        self.parser.add_argument('-s', '--show', action="store_true", help="Show my login")
+        self.parser.add_argument('-l', '--login', action="store_true", help="Login to an account")
+        self.parser.add_argument('-d', '--delete', action="store_true", help="Delete something")
+        self.parser.add_argument('-e', '--edit', action="store_true", help="Edit something")
+
 if __name__ == "__main__":
     autolog = Autolog()
     autolog.main()
