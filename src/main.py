@@ -8,6 +8,21 @@ class Autolog:
         self.data_yaml = data_yaml
         self.users = {}
 
+    def main(self):
+        args = self.parser.parse_args()
+
+        if args.create:
+            self.create_user()
+        elif args.show:
+            self.show()
+        elif args.login:
+            self.login()
+        elif args.delete:
+            self.delete()
+        elif args.edit:
+            self.edit()
+
+
 if __name__ == "__main__":
     autolog = Autolog()
     autolog.main()
