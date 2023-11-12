@@ -47,4 +47,5 @@ class Autolog:
 
 if __name__ == "__main__":
     autolog = Autolog()
+    autolog.setup_parser()
     autolog.main()
