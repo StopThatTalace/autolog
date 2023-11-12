@@ -22,7 +22,7 @@ class Autolog:
             self.edit()
 
     def create_user(self):
-        user_category = input("Enter a name for this new login (work, school, home etc..):")
+        user_category = input("[+] Enter a name for this new login (work, school, home etc..):")
 
         if os.path.exists(self.data_yaml):
             with open(self.data_yaml, 'r') as data_file:
@@ -30,8 +30,8 @@ class Autolog:
 
 
         self.users[user_category] = {
-            "name": input("Enter the NAME of your github account:"),
-            "email": input("Enter the EMAIL of your github account:")
+            "name": input("[+] Enter the NAME of your github account:"),
+            "email": input("[+] Enter the EMAIL of your github account:")
         }
 
         with open(self.data_yaml, 'w') as data:
