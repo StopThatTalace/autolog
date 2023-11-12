@@ -1,11 +1,10 @@
 import argparse
 import yaml
-
-data_yaml = "data.yaml"
+import os
 
 class Autolog:
     def __init__(self, data_yaml="data.yaml"):
-        self.data_yaml = data_yaml
+        self.data_yaml = os.path.join(os.path.dirname(os.path.abspath(__file__)), data_yaml)
         self.users = {}
 
     def main(self):
@@ -34,8 +33,11 @@ class Autolog:
 
     def show(self):
         print("[+] Showing logins")
-        for category, user_info in self.users.items():
-            print(f"{category}: Name - {user_info['name']}, Email - {user_info['email']}")
+        if not self.users:
+            print("[-] No logins available.")
+        else:
+            for category, user_info in self.users.items():
+                print(f"{category}: Name - {user_info['name']}, Email - {user_info['email']}")
 
     def setup_parser(self):
         self.parser = argparse.ArgumentParser(description="Command-line tool for GitHub config global")
