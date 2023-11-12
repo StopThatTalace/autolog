@@ -18,4 +18,4 @@ python3 /src/main.py [-h] [-c] [-s] [-l] [-d] [-e]
 ### WARNING ⚠️
 This is a beta version, it means (for this one), certain error are not handle, but it works perfectly fine!
 
-Talace 🌌
+> Author : Talace🌌
