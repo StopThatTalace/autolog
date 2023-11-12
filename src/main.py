@@ -32,6 +32,11 @@ class Autolog:
         with open(self.data_yaml, 'w') as data:
             yaml.dump(self.users, data, default_style='\'"')
 
+    def show(self):
+        print("[+] Showing logins")
+        for category, user_info in self.users.items():
+            print(f"{category}: Name - {user_info['name']}, Email - {user_info['email']}")
+
 if __name__ == "__main__":
     autolog = Autolog()
     autolog.main()
