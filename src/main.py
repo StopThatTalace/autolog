@@ -23,6 +23,12 @@ class Autolog:
 
     def create_user(self):
         user_category = input("Enter a name for this new login (work, school, home etc..):")
+
+        if os.path.exists(self.data_yaml):
+            with open(self.data_yaml, 'r') as data_file:
+                self.users = yaml.safe_load(data_file)
+
+
         self.users[user_category] = {
             "name": input("Enter the NAME of your github account:"),
             "email": input("Enter the EMAIL of your github account:")
@@ -33,11 +39,17 @@ class Autolog:
 
     def show(self):
         print("[+] Showing logins")
-        if not self.users:
-            print("[-] No logins available.")
+        if not os.path.exists(self.data_yaml):
+            print("[-] No file available.")
         else:
-            for category, user_info in self.users.items():
-                print(f"{category}: Name - {user_info['name']}, Email - {user_info['email']}")
+            with open(self.data_yaml, 'r') as data_file:
+                self.users = yaml.safe_load(data_file)
+
+            if not self.users:
+                print("[-] No logins available.")
+            else:
+                for category, user_info in self.users.items():
+                    print(f"{category}: {user_info['name']} - {user_info['email']}")
 
     def setup_parser(self):
         self.parser = argparse.ArgumentParser(description="Command-line tool for GitHub config global")
