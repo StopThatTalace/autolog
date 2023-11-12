@@ -1,2 +1,3 @@
 # autolog
- Little tool to make my git config faster
+Little tool to make my git config global faster
+
