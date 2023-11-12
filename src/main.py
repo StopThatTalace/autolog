@@ -91,6 +91,35 @@ class Autolog:
         else:
             print(f"[-] Login category '{category}' not found.")
 
+    def edit(self):
+        category = input("[+] Enter the name of the login category you want to EDIT: ")
+
+        if not os.path.exists(self.data_yaml):
+            print("[-] No file or no USER found.")
+            return
+
+        with open(self.data_yaml, 'r') as data_file:
+            self.users = yaml.safe_load(data_file)
+
+        if category in self.users:
+            print(f"[+] Editing user in category '{category}':")
+            new_name = input(f"Enter the new NAME (current: {self.users[category]['name']}): ")
+            new_email = input(f"Enter the new EMAIL (current: {self.users[category]['email']}): ")
+
+            choice = input(
+                f"[?] Are you sure you want to update user '{self.users[category]['name']}' with new name '{new_name}' and new email '{new_email}'? (y/n): ")
+            if choice.lower() == 'y':
+                self.users[category]['name'] = new_name
+                self.users[category]['email'] = new_email
+                with open(self.data_yaml, 'w') as data:
+                    yaml.dump(self.users, data, default_style='\'"')
+                print(f"[+] User in category '{category}' updated.")
+            else:
+                print("[+] Update canceled.")
+                print("[+] Exiting, bye!")
+        else:
+            print(f"[-] Login category '{category}' not found.")
+
     def setup_parser(self):
         self.parser = argparse.ArgumentParser(description="Command-line tool for GitHub config global")
         self.parser.add_argument('-c', '--create', action="store_true", help="Create something")
