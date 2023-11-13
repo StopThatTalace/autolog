@@ -41,12 +41,15 @@ class Autolog:
             "email": input("[+] Enter the EMAIL of your github account:")
         }
 
+        print("[+] User created!")
+
         with open(self.data_yaml, 'w') as data:
             yaml.dump(self.users, data, default_style='\'"')
 
     def show(self):
         print("-------------------")
         print("[+] Showing logins")
+        print("-------------------")
         if not os.path.exists(self.data_yaml):
             print("[-] No file available.")
         else:
@@ -59,13 +62,16 @@ class Autolog:
                 for category, user_info in self.users.items():
                     print(f"[{category}]: {user_info['name']} - {user_info['email']}")
                     print("-------------------")
-                    print("[+] Your current configuration:")
 
-                    current_user = subprocess.run('git config --global user.name', shell=True, capture_output=True, text=True)
-                    current_mail = subprocess.run('git config --global user.email', shell=True, capture_output=True, text=True)
+                print("[+] Your current configuration:")
 
-                    print(f"[User]: {current_user.stdout.strip()}")
-                    print(f"[Mail]: {current_mail.stdout.strip()}")
+                current_user = subprocess.run('git config --global user.name', shell=True, capture_output=True,
+                                              text=True)
+                current_mail = subprocess.run('git config --global user.email', shell=True, capture_output=True,
+                                              text=True)
+
+                print(f"[User]: {current_user.stdout.strip()}")
+                print(f"[Mail]: {current_mail.stdout.strip()}")
 
     def login(self):
         category = input("[+] Enter the name of the login category you want to use: ")
