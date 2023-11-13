@@ -3,6 +3,19 @@ import subprocess
 import yaml
 import os
 
+
+def current_config():
+    print("[+] Your current configuration:")
+
+    current_user = subprocess.run('git config --global user.name', shell=True, capture_output=True,
+                                  text=True)
+    current_mail = subprocess.run('git config --global user.email', shell=True, capture_output=True,
+                                  text=True)
+
+    print(f"[User]: {current_user.stdout.strip()}")
+    print(f"[Mail]: {current_mail.stdout.strip()}")
+
+
 class Autolog:
     def __init__(self, data_yaml="data.yaml"):
         self.data_yaml = os.path.join(os.path.dirname(os.path.abspath(__file__)), data_yaml)
@@ -63,15 +76,7 @@ class Autolog:
                     print(f"[{category}]: {user_info['name']} - {user_info['email']}")
                     print("-------------------")
 
-                print("[+] Your current configuration:")
-
-                current_user = subprocess.run('git config --global user.name', shell=True, capture_output=True,
-                                              text=True)
-                current_mail = subprocess.run('git config --global user.email', shell=True, capture_output=True,
-                                              text=True)
-
-                print(f"[User]: {current_user.stdout.strip()}")
-                print(f"[Mail]: {current_mail.stdout.strip()}")
+                current_config()
 
     def login(self):
         category = input("[+] Enter the name of the login category you want to use: ")
@@ -84,8 +89,7 @@ class Autolog:
 
             if category in self.users:
                 print(f"[+] Logging in as {self.users[category]['name']}")
-                os.system(f"git config --global user.name {self.users[category]['name']}")
-                os.system(f"git config --global user.email {self.users[category]['email']}")
+                current_config()
             else:
                 print(f"[-] Login category '{category}' not found.")
 
