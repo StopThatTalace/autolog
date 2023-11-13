@@ -28,6 +28,12 @@ class Autolog:
             with open(self.data_yaml, 'r') as data_file:
                 self.users = yaml.safe_load(data_file)
 
+                # Check if self.users is None and initialize it as an empty dictionary
+                if self.users is None:
+                    self.users = {}
+        else:
+            # If the file doesn't exist, initialize self.users as an empty dictionary
+            self.users = {}
 
         self.users[user_category] = {
             "name": input("[+] Enter the NAME of your github account:"),
