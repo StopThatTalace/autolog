@@ -45,6 +45,7 @@ class Autolog:
             yaml.dump(self.users, data, default_style='\'"')
 
     def show(self):
+        print("-------------------")
         print("[+] Showing logins")
         if not os.path.exists(self.data_yaml):
             print("[-] No file available.")
@@ -57,6 +58,7 @@ class Autolog:
             else:
                 for category, user_info in self.users.items():
                     print(f"[{category}]: {user_info['name']} - {user_info['email']}")
+                    print("-------------------")
                     print("[+] Your current configuration:")
 
                     current_user = subprocess.run('git config --global user.name', shell=True, capture_output=True, text=True)
