@@ -88,6 +88,10 @@ class Autolog:
                 self.users = yaml.safe_load(data_file)
 
             if category in self.users:
+                current_user = subprocess.run(f"git config --global user.name  {self.users[category]['name']}", shell=True, capture_output=True,
+                                              text=True)
+                current_mail = subprocess.run(f"git config --global user.email {self.users[category]['email']}", shell=True, capture_output=True,
+                                              text=True)
                 print(f"[+] Logging in as {self.users[category]['name']}")
                 current_config()
             else:
